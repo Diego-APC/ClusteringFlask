@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %}Interpretación de resultados{% endblock %}
+
+{% block content %}
+<h2 class="page-title">Interpretación de resultados</h2>
+
+<div class="content-card card">
+  <div class="content-card-header">Perfil promedio por clúster — k = {{ k }}</div>
+  <div class="card-body">
+    <p>
+      La siguiente tabla muestra los <strong>valores medios de cada variable</strong>
+      para los clientes que pertenecen a cada clúster. Permite describir las
+      características típicas de cada segmento.
+    </p>
+    {{ profile_html | safe }}
+  </div>
+</div>
+
+<div class="content-card card">
+  <div class="content-card-header">Datos procesados</div>
+  <div class="card-body">
+    <p class="text-muted">
+      Mostrando los primeros 50 registros de {{ total_records }} totales,
+      con el clúster asignado a cada cliente.
+    </p>
+    <div class="table-responsive">
+      <table class="table table-striped table-bordered table-sm">
+        <thead>
+          <tr>
+            {% for col in columns %}
+            <th>{{ col }}</th>
+            {% endfor %}
+          </tr>
+        </thead>
+        <tbody>
+          {% for row in table_data %}
+          <tr>
+            {% for col in columns %}
+            <td>{{ row[col] }}</td>
+            {% endfor %}
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="d-flex justify-content-between mt-4">
+  <a href="/centroides/?k={{ k }}" class="btn btn-outline-nav">← Centroides</a>
+  <a href="/" class="btn btn-grad">Volver al inicio</a>
+</div>
+{% endblock %}

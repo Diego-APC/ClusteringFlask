@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Visualización de clústeres{% endblock %}
+
+{% block content %}
+<h2 class="page-title">Visualización de los clústeres</h2>
+
+<div class="content-card card">
+  <div class="content-card-header">Dispersión con PCA — k = {{ k }} clústeres</div>
+  <div class="card-body">
+    <p>
+      Para graficar los clústeres en 2 dimensiones se aplicó
+      <strong>PCA (Análisis de Componentes Principales)</strong>, que reduce las
+      5 variables a 2 componentes principales conservando la mayor parte de la
+      variabilidad de los datos.
+    </p>
+    <p>
+      Cada punto representa un cliente. El color indica a qué clúster pertenece.
+      Grupos bien separados indican que K-Means encontró segmentos diferenciados.
+    </p>
+    <div class="text-center my-3">
+      <img src="data:image/png;base64,{{ scatter_img }}" alt="Visualización de clústeres" class="img-fluid rounded shadow-sm">
+    </div>
+  </div>
+</div>
+
+<div class="d-flex justify-content-between mt-4">
+  <a href="/ejecucion/?k={{ k }}" class="btn btn-outline-nav">← Ejecución</a>
+  <a href="/centroides/?k={{ k }}" class="btn btn-grad">Siguiente: Centroides →</a>
+</div>
+{% endblock %}

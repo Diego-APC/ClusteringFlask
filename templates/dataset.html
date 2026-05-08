@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block title %}Dataset{% endblock %}
+
+{% block content %}
+<h2 class="page-title">Explicación del dataset</h2>
+
+<div class="content-card card">
+  <div class="content-card-header">Ficha técnica</div>
+  <div class="card-body">
+    <table class="table table-bordered mb-0">
+      <tbody>
+        <tr><th>Nombre</th><td>Credit Card Customer Data</td></tr>
+        <tr><th>Registros</th><td>660 clientes</td></tr>
+        <tr><th>Variables originales</th><td>7</td></tr>
+        <tr><th>Variables usadas para clustering</th><td>5 (numéricas)</td></tr>
+        <tr><th>Formato</th><td>CSV</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="content-card card">
+  <div class="content-card-header">Variables utilizadas</div>
+  <div class="card-body">
+    <p>Se eliminaron <code>Sl_No</code> y <code>Customer Key</code> por ser identificadores sin valor predictivo. Las 5 variables restantes son:</p>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Variable</th>
+          <th>Descripción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><code>Avg_Credit_Limit</code></td><td>Límite de crédito promedio del cliente</td></tr>
+        <tr><td><code>Total_Credit_Cards</code></td><td>Número total de tarjetas de crédito</td></tr>
+        <tr><td><code>Total_visits_bank</code></td><td>Visitas realizadas a sucursales bancarias</td></tr>
+        <tr><td><code>Total_visits_online</code></td><td>Accesos a la banca en línea</td></tr>
+        <tr><td><code>Total_calls_made</code></td><td>Llamadas telefónicas realizadas al banco</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="content-card card">
+  <div class="content-card-header">Preparación de los datos</div>
+  <div class="card-body">
+    <ol>
+      <li><strong>Eliminación de columnas:</strong> se retiran <code>Sl_No</code> y <code>Customer Key</code>.</li>
+      <li><strong>Imputación de nulos:</strong> se reemplazan valores faltantes con la mediana de cada variable.</li>
+      <li><strong>Winsorización:</strong> los valores extremos (outliers) se limitan a los percentiles 1 y 99.</li>
+      <li><strong>Normalización:</strong> se aplica <code>StandardScaler</code> para que todas las variables tengan media 0 y desviación estándar 1.</li>
+    </ol>
+  </div>
+</div>
+
+<div class="d-flex justify-content-between mt-4">
+  <a href="/descripcion/" class="btn btn-outline-nav">← Descripción</a>
+  <a href="/conceptos/" class="btn btn-grad">Siguiente: Conceptos →</a>
+</div>
+{% endblock %}

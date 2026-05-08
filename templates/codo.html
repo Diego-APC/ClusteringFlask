@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}Método del Codo{% endblock %}
+
+{% block content %}
+<h2 class="page-title">Gráfica del método del codo</h2>
+
+<div class="content-card card">
+  <div class="content-card-header">Inercia vs. número de clústeres</div>
+  <div class="card-body">
+    <p>
+      La siguiente gráfica muestra cómo varía la inercia al aumentar el número de clústeres.
+      Observa el punto donde la curva forma un <strong>codo</strong> — ese es el valor de k más adecuado.
+    </p>
+    <div class="text-center my-3">
+      <img src="data:image/png;base64,{{ elbow_img }}" alt="Método del Codo" class="img-fluid rounded shadow-sm">
+    </div>
+  </div>
+</div>
+
+<div class="content-card card">
+  <div class="content-card-header">Elige el número de clústeres</div>
+  <div class="card-body">
+    <form method="POST" action="/codo/">
+      <p>Con base en la gráfica, ingresa el valor de k que consideres adecuado:</p>
+      <div class="row g-2 align-items-center">
+        <div class="col-auto">
+          <label for="k" class="col-form-label fw-bold">Número de clústeres (k):</label>
+        </div>
+        <div class="col-auto">
+          <input type="number" id="k" name="k" min="2" max="10" value="3" class="form-control" style="width: 90px;">
+        </div>
+        <div class="col-auto">
+          <button type="submit" class="btn btn-grad">Ejecutar modelo</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="d-flex justify-content-between mt-4">
+  <a href="/conceptos/" class="btn btn-outline-nav">← Conceptos</a>
+  <a href="/ejecucion/" class="btn btn-outline-nav">Ver Ejecución →</a>
+</div>
+{% endblock %}

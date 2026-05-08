@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% block title %}Conceptos de K-Means{% endblock %}
+
+{% block content %}
+<h2 class="page-title">Conceptos principales de K-Means</h2>
+
+<div class="content-card card">
+  <div class="content-card-header">¿Qué es K-Means?</div>
+  <div class="card-body">
+    <p>
+      K-Means es un algoritmo de <strong>aprendizaje no supervisado</strong> que divide
+      un conjunto de datos en <strong>k grupos o clústeres</strong>. Cada grupo queda
+      representado por un <strong>centroide</strong>, que es el punto promedio de todos
+      los registros que pertenecen a ese grupo.
+    </p>
+    <p>
+      El algoritmo busca minimizar la distancia entre cada punto y el centroide de su clúster,
+      logrando que los grupos sean lo más compactos y diferenciados posible.
+    </p>
+  </div>
+</div>
+
+<div class="content-card card">
+  <div class="content-card-header">¿Cómo funciona?</div>
+  <div class="card-body">
+    <ol>
+      <li>Se eligen <strong>k centroides iniciales</strong> de forma aleatoria.</li>
+      <li>Cada registro se asigna al centroide <strong>más cercano</strong>.</li>
+      <li>Los centroides se <strong>recalculan</strong> como el promedio de los registros de su grupo.</li>
+      <li>Se repiten los pasos 2 y 3 hasta que los grupos <strong>ya no cambian</strong>.</li>
+    </ol>
+  </div>
+</div>
+
+<div class="content-card card">
+  <div class="content-card-header">¿Qué es la inercia?</div>
+  <div class="card-body">
+    <p>
+      La inercia es la <strong>suma de las distancias al cuadrado</strong> entre cada punto
+      y el centroide de su clúster. Mide qué tan compactos son los grupos.
+    </p>
+    <p>
+      A <strong>menor inercia</strong>, los grupos son más compactos y homogéneos.
+      Sin embargo, agregar más clústeres siempre reduce la inercia, por eso se usa
+      el método del codo para encontrar un equilibrio.
+    </p>
+  </div>
+</div>
+
+<div class="content-card card">
+  <div class="content-card-header">¿Qué es el método del codo?</div>
+  <div class="card-body">
+    <p>
+      Es una técnica para elegir el número de clústeres k. Se grafica la inercia
+      para diferentes valores de k (del 1 al 10).
+    </p>
+    <p>
+      El punto donde la curva deja de bajar de forma pronunciada y forma un
+      <strong>"codo"</strong> indica el k más adecuado, porque agregar más clústeres
+      a partir de ahí ya no aporta una mejora significativa.
+    </p>
+  </div>
+</div>
+
+<div class="d-flex justify-content-between mt-4">
+  <a href="/dataset/" class="btn btn-outline-nav">← Dataset</a>
+  <a href="/codo/" class="btn btn-grad">Siguiente: Método del Codo →</a>
+</div>
+{% endblock %}

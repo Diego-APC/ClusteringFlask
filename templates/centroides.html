@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Centroides{% endblock %}
+
+{% block content %}
+<h2 class="page-title">Visualización de centroides</h2>
+
+<div class="content-card card">
+  <div class="content-card-header">Heatmap de centroides — k = {{ k }} clústeres</div>
+  <div class="card-body">
+    <p>
+      El siguiente heatmap muestra los <strong>valores promedio de cada variable</strong>
+      para cada clúster, expresados en la escala original de los datos.
+    </p>
+    <p>
+      Colores cálidos (rojo) indican valores altos; colores fríos (azul) indican valores bajos.
+      Permite comparar directamente las características típicas de cada grupo de clientes.
+    </p>
+    <div class="text-center my-3">
+      <img src="data:image/png;base64,{{ heatmap_img }}" alt="Heatmap de centroides" class="img-fluid rounded shadow-sm">
+    </div>
+  </div>
+</div>
+
+<div class="d-flex justify-content-between mt-4">
+  <a href="/clusters/?k={{ k }}" class="btn btn-outline-nav">← Clústeres</a>
+  <a href="/interpretacion/?k={{ k }}" class="btn btn-grad">Siguiente: Interpretación →</a>
+</div>
+{% endblock %}
