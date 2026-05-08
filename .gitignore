@@ -1,0 +1,87 @@
+# Entornos virtuales
+venv/
+.venv/
+env/
+.env/
+ENV/
+env.bak/
+venv.bak/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+*.egg
+dist/
+build/
+*.pyc
+
+# IDEs y editores
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+*.suo
+*.user
+*.sln
+*.dbmdl
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+*.ipynb
+
+# Archivos de datos (si son grandes)
+*.csv
+*.xlsx
+*.xls
+*.db
+*.sqlite
+*.sqlite3
+
+# Modelos entrenados
+*.pkl
+*.joblib
+*.h5
+*.pth
+*.pt
+
+# Logs y bases de datos
+*.log
+*.pid
+*.seed
+*.pid.lock
+
+# Flask
+instance/
+.webassets-cache
+.env
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+# Archivos del sistema
+Thumbs.db
+desktop.ini
+ehthumbs.db
+
+# Archivos de backup
+*.bak
+*.backup
+*.tmp
+
+# Archivos grandes o temporales
+*.zip
+*.tar
+*.gz
+dataset/
+data/
+*.parquet
+.claude/

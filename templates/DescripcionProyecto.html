@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bienestar Animal en Cundinamarca</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+
+  <header>
+    <h1>Estudio del bienestar animal en Cundinamarca mediante técnicas de minería de datos.</h1>
+    <p>Proyecto de Minería de Datos</p>
+    <ul>
+      <li>Diego Alexander Pinzón Camargo</li>
+      <li>Julián Santiago Gutiérrez Rodríguez</li>
+      <li>Andres Felipe Segura Suarez</li>
+    </ul>
+  </header>
+
+  <main>
+
+    <section id="introduccion">
+      <h2>Introducción</h2>
+      <p>
+        El bienestar animal es un campo de estudio que evalúa las condiciones físicas, ecológicas y de conservación en las que viven
+        las especies de fauna silvestre en un territorio determinado. En Colombia, departamentos como Cundinamarca concentran una
+        notable diversidad biológica, pero al mismo tiempo enfrentan presiones crecientes derivadas de la urbanización, la fragmentación
+        de hábitats, el tráfico ilegal de especies y la introducción de fauna exótica e invasora.
+      </p>
+      <p>
+        Este proyecto busca estudiar el estado del bienestar animal en Cundinamarca a través de un enfoque de minería de datos aplicado
+        a registros biológicos oficiales. Mediante técnicas de exploración, agrupamiento y análisis de asociaciones, se busca identificar
+        patrones en la distribución de especies amenazadas, endémicas, migratorias y exóticas, caracterizar perfiles de riesgo por grupo
+        biológico y descubrir relaciones significativas entre los distintos factores que determinan el estado de conservación de la fauna
+        en el departamento.
+      </p>
+      <p>
+        El trabajo se apoya en cifras agregadas publicadas por el <strong>Sistema de Información sobre Biodiversidad de Colombia (SiB Colombia)</strong>
+        a través de cifras.biodiversidad.co. Estos datos consolidan información reportada por múltiples organizaciones de la red SiB y
+        proporcionan, para Cundinamarca, estadísticas por grupo biológico sobre especies registradas, categorías de amenaza nacionales
+        e internacionales, listas CITES, endemismo, migración y presencia de especies exóticas e invasoras.
+      </p>
+    </section>
+
+    <section id="objetivos">
+      <h2>Objetivos</h2>
+
+      <h3>Objetivo general</h3>
+      <p>
+        Realizar un estudio del bienestar animal en Cundinamarca como fenómeno multivariable mediante técnicas de minería de datos,
+        con el fin de identificar patrones, perfiles de riesgo y relaciones significativas entre los factores que determinan el estado
+        de conservación de la fauna silvestre en el departamento.
+      </p>
+
+      <h3>Objetivos específicos</h3>
+      <ol>
+        <li>
+          Explorar y comprender la estructura de los datos disponibles a través de un análisis exploratorio, identificando distribuciones,
+          proporciones y características relevantes de las especies registradas en Cundinamarca por grupo biológico y categoría de amenaza.
+        </li>
+        <li>
+          Segmentar los grupos biológicos en perfiles de riesgo mediante técnicas de agrupamiento, permitiendo caracterizar patrones
+          comunes entre grupos con niveles similares de amenaza, endemismo, presencia de especies exóticas e invasoras y registros
+          de observación.
+        </li>
+        <li>
+          Determinar los factores más asociados al estado de vulnerabilidad de las especies, evaluando la relación entre variables
+          como categoría de amenaza nacional e internacional, endemismo, condición migratoria y presencia en listas CITES.
+        </li>
+        <li>
+          Descubrir relaciones significativas entre características de las especies mediante el análisis de asociaciones, con el
+          propósito de identificar combinaciones de factores que co-ocurren frecuentemente en situaciones de alto riesgo para la fauna.
+        </li>
+      </ol>
+    </section>
+
+    <section id="dataset">
+      <h2>Dataset</h2>
+
+      <h3>Ficha técnica</h3>
+      <table>
+        <tr>
+          <th>Nombre</th>
+          <td>Cifras de Biodiversidad — Cundinamarca</td>
+        </tr>
+        <tr>
+          <th>Fuente</th>
+          <td>SiB Colombia — Sistema de Información sobre Biodiversidad de Colombia</td>
+        </tr>
+        <tr>
+          <th>URL</th>
+          <td><a href="https://cifras.biodiversidad.co" target="_blank">cifras.biodiversidad.co</a></td>
+        </tr>
+        <tr>
+          <th>Repositorio</th>
+          <td><a href="https://gitlab.com/sib-colombia/cifras-biodiversidad" target="_blank">gitlab.com/sib-colombia/cifras-biodiversidad</a></td>
+        </tr>
+        <tr>
+          <th>Corte de datos</th>
+          <td>2023 (con referencia comparativa a 2022)</td>
+        </tr>
+        <tr>
+          <th>Formato</th>
+          <td>TSV (datos tabulares separados por tabulación)</td>
+        </tr>
+        <tr>
+          <th>Tipo</th>
+          <td>Datos abiertos oficiales, agregados por grupo biológico y temática</td>
+        </tr>
+        <tr>
+          <th>Licencia</th>
+          <td>GNU General Public License v3.0</td>
+        </tr>
+      </table>
+
+      <h3>Variables principales</h3>
+
+      <h4>Identificación</h4>
+      <ul>
+        <li><code>slug_grupo</code> — Grupo biológico (aves, mamíferos, anfibios, reptiles, plantas, etc.)</li>
+        <li><code>slug_especie</code> — Identificador de la especie</li>
+        <li><code>slug_tematica</code> — Categoría temática asignada a la especie</li>
+      </ul>
+
+      <h4>Registros y diversidad</h4>
+      <ul>
+        <li><code>registros_region_total</code> — Total de registros biológicos en el departamento</li>
+        <li><code>especies_region_total</code> — Total de especies registradas</li>
+        <li><code>registros</code> — Número de observaciones por especie</li>
+      </ul>
+
+      <h4>Estado de amenaza (Lista Nacional MADS)</h4>
+      <ul>
+        <li><code>especies_amenazadas_nacional_total</code> — Total de especies amenazadas</li>
+        <li><code>especies_amenazadas_nacional_cr</code> — En peligro crítico (CR)</li>
+        <li><code>especies_amenazadas_nacional_en</code> — En peligro (EN)</li>
+        <li><code>especies_amenazadas_nacional_vu</code> — Vulnerable (VU)</li>
+      </ul>
+
+      <h4>Estado de amenaza (Lista Roja UICN — global)</h4>
+      <ul>
+        <li><code>especies_amenazadas_global_cr / _en / _vu / _nt / _lc</code> — Categorías de la Lista Roja global</li>
+      </ul>
+
+      <h4>Otras categorías de interés</h4>
+      <ul>
+        <li><code>especies_cites_total</code> — Especies incluidas en apéndices CITES (comercio internacional)</li>
+        <li><code>especies_endemicas</code> — Especies endémicas de Colombia</li>
+        <li><code>especies_migratorias</code> — Especies migratorias</li>
+        <li><code>especies_exoticas_total</code> — Especies exóticas e invasoras</li>
+        <li><code>especies_invasoras</code> — Especies invasoras confirmadas</li>
+      </ul>
+
+      <h3>Justificación de la elección</h3>
+      <p>
+        Este conjunto de datos fue seleccionado por provenir de una fuente oficial y abierta que consolida información de cientos de
+        organizaciones científicas de Colombia. Permite abordar el bienestar animal desde múltiples dimensiones simultáneas —amenaza,
+        endemismo, comercio ilegal, invasión biológica— lo que lo hace idóneo para un análisis multivariable mediante minería de datos.
+        Su estructura por grupo biológico y por especie posibilita tanto análisis agregados como análisis a nivel de especie individual.
+      </p>
+    </section>
+
+    <section id="fases">
+      <h2>Fases del proyecto</h2>
+
+      <article id="fase-1">
+        <h3>Fase 1 — Comprensión y preparación de los datos</h3>
+        <p>
+          En esta fase se realiza la exploración inicial de los datos con el objetivo de comprender su estructura,
+          las características de sus variables y la calidad de la información disponible. Se analizan distribuciones
+          de especies por grupo biológico, proporciones de categorías de amenaza, presencia de endemismo y fauna
+          exótica, así como relaciones preliminares entre variables. Posteriormente se realiza el proceso de
+          preparación, incluyendo la normalización de variables numéricas, la codificación de variables categóricas
+          y la selección de atributos relevantes para las etapas posteriores.
+        </p>
+      </article>
+
+      <article id="fase-2">
+        <h3>Fase 2 — Identificación de perfiles de riesgo por grupo biológico</h3>
+        <p>
+          En esta etapa se busca identificar patrones dentro de los grupos biológicos presentes en Cundinamarca
+          mediante técnicas de agrupamiento. El objetivo es descubrir segmentos de grupos que compartan características
+          similares en términos de nivel de amenaza, endemismo, presencia de invasoras y volumen de registros.
+          Estos perfiles permiten caracterizar el estado del bienestar animal desde una perspectiva comparativa
+          entre grupos taxonómicos.
+        </p>
+      </article>
+
+      <article id="fase-3">
+        <h3>Fase 3 — Descubrimiento de relaciones entre factores de conservación</h3>
+        <p>
+          En esta etapa se analizan las relaciones entre las distintas variables del dataset con el fin de identificar
+          combinaciones de características que co-ocurren frecuentemente en especies o grupos en situación de
+          vulnerabilidad. El objetivo es descubrir patrones interpretables que revelen cómo se asocian variables
+          como la categoría de amenaza, el endemismo, la condición migratoria y la inclusión en listas CITES,
+          contribuyendo a comprender la naturaleza multifactorial del riesgo para la fauna en Cundinamarca.
+        </p>
+      </article>
+
+      <article id="fase-4">
+        <h3>Fase 4 — Integración de hallazgos y conclusiones</h3>
+        <p>
+          En la fase final se integran los resultados obtenidos a lo largo del análisis para construir una visión
+          global del estado del bienestar animal en Cundinamarca. Los patrones identificados, los perfiles de riesgo
+          por grupo biológico y las asociaciones descubiertas permiten elaborar conclusiones fundamentadas sobre
+          las principales dinámicas que determinan la vulnerabilidad de la fauna en el departamento, así como
+          identificar los grupos y especies que requieren mayor atención en términos de conservación.
+        </p>
+      </article>
+
+    </section>
+
+    <section id="herramientas">
+      <h2>Herramientas</h2>
+
+      <h3>Minería de datos y análisis</h3>
+      <ul>
+        <li><strong>Python 3.x</strong> — Lenguaje principal del proyecto</li>
+        <li><strong>Pandas</strong> — Manipulación y exploración de datos</li>
+        <li><strong>NumPy</strong> — Operaciones numéricas</li>
+        <li><strong>Scikit-learn</strong> — Modelos de clustering y análisis</li>
+        <li><strong>MLxtend</strong> — Algoritmo Apriori para reglas de asociación</li>
+        <li><strong>Matplotlib / Seaborn</strong> — Visualización de datos</li>
+        <li><strong>Jupyter Notebook</strong> — Entorno de desarrollo interactivo</li>
+      </ul>
+
+      <h3>Fuente de datos</h3>
+      <ul>
+        <li><strong>SiB Colombia</strong> — Sistema de Información sobre Biodiversidad de Colombia</li>
+        <li><strong>GitLab SiB</strong> — Repositorio oficial de cifras de biodiversidad</li>
+      </ul>
+
+      <h3>Bitácora y presentación</h3>
+      <ul>
+        <li><strong>Flask</strong> — Framework web para la bitácora del proyecto</li>
+        <li><strong>Git / GitHub</strong> — Control de versiones y colaboración en equipo</li>
+      </ul>
+
+    </section>
+
+  </main>
+
+  <footer>
+    <p>Proyecto desarrollado para la materia de Minería de Datos</p>
+  </footer>
+
+</body>
+</html>

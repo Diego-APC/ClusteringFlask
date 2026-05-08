@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>K-Means Clustering</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+
+  <header>
+    <h1>K-Means Clustering — Segmentación de Clientes</h1>
+    <p>Módulo de agrupamiento automático</p>
+    <nav>
+      <ul>
+        <li><a href="/PGC/" style="color: white;">Descripción del Proyecto</a></li>
+        <li><a href="/kmeans/" style="color: white;">K-Means Clustering</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+    <section id="descripcion">
+      <h2>Descripción del problema</h2>
+      <p>
+        Una entidad bancaria desea entender mejor el comportamiento de sus clientes
+        para poder ofrecer servicios más personalizados. Sin embargo, no cuenta con
+        etiquetas previas que clasifiquen a los clientes en grupos.
+      </p>
+      <p>
+        Para resolver esto, se aplica el algoritmo <strong>K-Means Clustering</strong>,
+        que permite agrupar automáticamente a los clientes según sus características
+        numéricas, sin necesidad de supervisión. El resultado son grupos (clústeres)
+        de clientes con comportamientos similares entre sí.
+      </p>
+    </section>
+
+    <section id="dataset">
+      <h2>Explicación del dataset</h2>
+      <p>
+        El dataset contiene información de <strong>660 clientes</strong> de una entidad bancaria.
+        Después de eliminar columnas identificadoras (<code>Sl_No</code> y <code>Customer Key</code>),
+        se trabaja con las siguientes 5 variables numéricas:
+      </p>
+      <ul>
+        <li><strong>Avg_Credit_Limit</strong> — Límite de crédito promedio del cliente.</li>
+        <li><strong>Total_Credit_Cards</strong> — Número total de tarjetas de crédito que posee.</li>
+        <li><strong>Total_visits_bank</strong> — Visitas realizadas a sucursales bancarias.</li>
+        <li><strong>Total_visits_online</strong> — Accesos a la banca en línea.</li>
+        <li><strong>Total_calls_made</strong> — Llamadas telefónicas realizadas al banco.</li>
+      </ul>
+      <p>
+        Antes de aplicar el algoritmo, los datos pasan por una etapa de limpieza:
+        se imputan valores nulos con la mediana y se aplica winsorización para
+        reducir el efecto de valores extremos (outliers).
+        Luego se normalizan con <strong>StandardScaler</strong> para que ninguna variable
+        domine por tener una escala mayor.
+      </p>
+    </section>
+
+    <section id="conceptos">
+      <h2>Conceptos principales de K-Means</h2>
+
+      <article>
+        <h3>¿Qué es K-Means?</h3>
+        <p>
+          K-Means es un algoritmo de aprendizaje no supervisado que divide un conjunto
+          de datos en <strong>k grupos</strong>. Cada grupo se representa por un
+          <strong>centroide</strong>, que es el punto promedio de todos los registros
+          que pertenecen a ese grupo.
+        </p>
+      </article>
+
+      <article>
+        <h3>¿Cómo funciona?</h3>
+        <ol>
+          <li>Se eligen k centroides iniciales de forma aleatoria.</li>
+          <li>Cada registro se asigna al centroide más cercano.</li>
+          <li>Los centroides se recalculan como el promedio de su grupo.</li>
+          <li>Se repiten los pasos 2 y 3 hasta que los grupos ya no cambian.</li>
+        </ol>
+      </article>
+
+      <article>
+        <h3>¿Qué es la inercia?</h3>
+        <p>
+          La inercia mide qué tan compactos son los clústeres. Es la suma de las
+          distancias al cuadrado entre cada punto y su centroide. A menor inercia,
+          más compactos y homogéneos son los grupos.
+        </p>
+      </article>
+
+      <article>
+        <h3>¿Qué es el método del codo?</h3>
+        <p>
+          Es una técnica para elegir el número de clústeres k. Se grafica la inercia
+          para diferentes valores de k. El punto donde la inercia deja de bajar de
+          forma pronunciada forma un "codo", y ese k es el más adecuado.
+        </p>
+      </article>
+
+    </section>
+
+    <section id="codo">
+      <h2>Método del codo</h2>
+      <p>
+        La siguiente gráfica muestra cómo varía la inercia al aumentar el número de
+        clústeres. Observa el punto donde la curva forma un codo y elige ese valor de k.
+      </p>
+
+      <div style="text-align: center; margin: 20px 0;">
+        <img src="data:image/png;base64,{{ elbow_img }}" alt="Gráfica del método del codo" style="max-width: 100%; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+      </div>
+
+      <form method="POST" action="/kmeans/" style="margin-top: 20px;">
+        <p>Con base en la gráfica, elige el número de clústeres:</p>
+        <div style="display: flex; align-items: center; gap: 15px; margin-top: 10px;">
+          <label for="k"><strong>Número de clústeres (k):</strong></label>
+          <input type="number" id="k" name="k" min="2" max="10" value="3"
+            style="padding: 8px 12px; border: 1px solid #ccc; border-radius: 6px; font-size: 1em; width: 80px;">
+          <button type="submit"
+            style="padding: 9px 20px; background-color: #2A9D8F; color: white; border: none; border-radius: 6px; font-size: 1em; cursor: pointer;">
+            Ejecutar modelo
+          </button>
+        </div>
+      </form>
+    </section>
+
+    {% if scatter_img %}
+
+    <section id="ejecucion">
+      <h2>Ejecución del modelo</h2>
+      <p>
+        El modelo K-Means fue entrenado con <strong>k = {{ n_clusters }} clústeres</strong>
+        sobre los 660 registros del dataset, usando las 5 variables numéricas normalizadas.
+      </p>
+    </section>
+
+    <section id="clusters">
+      <h2>Visualización de los clústeres</h2>
+      <p>
+        Para poder graficar los clústeres en 2 dimensiones, se aplicó
+        <strong>PCA (Análisis de Componentes Principales)</strong>, que reduce las
+        5 variables a 2 componentes principales conservando la mayor parte de la
+        variabilidad de los datos. Cada punto representa un cliente y el color indica
+        a qué clúster pertenece.
+      </p>
+      <div style="text-align: center; margin: 20px 0;">
+        <img src="data:image/png;base64,{{ scatter_img }}" alt="Visualización de clústeres con PCA" style="max-width: 100%; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+      </div>
+    </section>
+
+    <section id="centroides">
+      <h2>Visualización de centroides</h2>
+      <p>
+        El siguiente heatmap muestra los valores promedio de cada variable para
+        cada clúster, en la escala original de los datos. Permite comparar
+        directamente las características de cada grupo de clientes.
+      </p>
+      <div style="text-align: center; margin: 20px 0;">
+        <img src="data:image/png;base64,{{ heatmap_img }}" alt="Heatmap de centroides" style="max-width: 100%; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+      </div>
+    </section>
+
+    <section id="interpretacion">
+      <h2>Interpretación de resultados</h2>
+      <p>
+        La siguiente tabla muestra el perfil promedio de cada clúster, es decir,
+        los valores medios de cada variable para los clientes que pertenecen a ese grupo.
+        Esto permite describir las características típicas de cada segmento.
+      </p>
+      {{ profile_html | safe }}
+    </section>
+
+    <section id="tabla">
+      <h2>Datos procesados</h2>
+      <p>Mostrando los primeros 50 registros de {{ total_records }} totales, con el clúster asignado a cada cliente.</p>
+      <div style="overflow-x: auto;">
+        <table>
+          <thead>
+            <tr>
+              {% for col in columns %}
+              <th>{{ col }}</th>
+              {% endfor %}
+            </tr>
+          </thead>
+          <tbody>
+            {% for row in table_data %}
+            <tr>
+              {% for col in columns %}
+              <td>{{ row[col] }}</td>
+              {% endfor %}
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    {% endif %}
+
+  </main>
+
+  <footer>
+    <p>Proyecto desarrollado para la materia de Minería de Datos</p>
+  </footer>
+
+</body>
+</html>

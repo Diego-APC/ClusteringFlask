@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Minería de Datos — PGC</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+  <style>
+    .menu-cards {
+      display: flex;
+      gap: 30px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+      padding: 30px;
+      width: 320px;
+      text-align: center;
+    }
+
+    .card h3 {
+      color: var(--secondary-color);
+      font-size: 1.4em;
+      margin-bottom: 15px;
+    }
+
+    .card p {
+      color: var(--text-light);
+      font-size: 0.95em;
+      margin-bottom: 25px;
+    }
+
+    .card a {
+      display: inline-block;
+      background-color: var(--primary-color);
+      color: white;
+      padding: 10px 24px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background-color 0.3s ease;
+    }
+
+    .card a:hover {
+      background-color: var(--secondary-color);
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Minería de Datos</h1>
+    <p>Selecciona un proyecto para explorar</p>
+    <ul>
+      <li>Diego Alexander Pinzón Camargo</li>
+      <li>Julián Santiago Gutiérrez Rodríguez</li>
+      <li>Andres Felipe Segura Suarez</li>
+    </ul>
+  </header>
+
+  <main>
+
+    <section>
+      <h2>Proyectos</h2>
+      <p>
+        Esta aplicación reúne los proyectos desarrollados para la materia de Minería de Datos.
+        Selecciona el proyecto que deseas explorar.
+      </p>
+
+      <div class="menu-cards">
+
+        <div class="card">
+          <h3>Bienestar Animal en Cundinamarca</h3>
+          <p>
+            Estudio del estado de conservación de la fauna silvestre en Cundinamarca
+            mediante técnicas de minería de datos aplicadas a registros del SiB Colombia.
+          </p>
+          <a href="/PGC/">Ver proyecto</a>
+        </div>
+
+        <div class="card">
+          <h3>Aplicando K-Means</h3>
+          <p>
+            Segmentación de clientes bancarios mediante el algoritmo K-Means Clustering.
+            Incluye método del codo, visualización de clústeres y análisis de centroides.
+          </p>
+          <a href="/kmeans/">Ver proyecto</a>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>Proyecto desarrollado para la materia de Minería de Datos</p>
+  </footer>
+
+</body>
+</html>
