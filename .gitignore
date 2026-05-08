@@ -36,7 +36,6 @@ build/
 *.ipynb
 
 # Archivos de datos (si son grandes)
-*.csv
 *.xlsx
 *.xls
 *.db
@@ -82,6 +81,5 @@ ehthumbs.db
 *.tar
 *.gz
 dataset/
-data/
 *.parquet
 .claude/
